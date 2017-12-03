@@ -14,6 +14,7 @@ export default class GridField extends ObjectField {
       disabled,
       readonly,
       onBlur,
+      onFocus,
       formData
     } = this.props
     const { definitions, fields, formContext } = this.props.registry
@@ -59,6 +60,7 @@ export default class GridField extends ObjectField {
                               formData={formData[name]}
                               onChange={this.onPropertyChange(name)}
                               onBlur={onBlur}
+                              onFocus={onFocus}
                               registry={this.props.registry}
                               disabled={disabled}
                               readonly={readonly}/>
