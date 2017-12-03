@@ -50,18 +50,18 @@ export default class GridField extends ObjectField {
                       return (
                           <Col {...rowProps} key={index} style={style}>
                             <SchemaField
-                               name={name}
-                               required={this.isRequired(name)}
-                               schema={schema.properties[name]}
-                               uiSchema={uiSchema[name]}
-                               errorSchema={errorSchema[name]}
-                               idSchema={idSchema[name]}
-                               formData={formData[name]}
-                               onChange={this.onPropertyChange(name)}
-                               onBlur={onBlur}
-                               registry={this.props.registry}
-                               disabled={disabled}
-                               readonly={readonly}/>
+                              name={name}
+                              required={this.isRequired(name)}
+                              schema={schema.properties[name]}
+                              uiSchema={uiSchema[name]}
+                              errorSchema={errorSchema[name]}
+                              idSchema={idSchema[name]}
+                              formData={formData[name]}
+                              onChange={this.onPropertyChange(name)}
+                              onBlur={onBlur}
+                              registry={this.props.registry}
+                              disabled={disabled}
+                              readonly={readonly}/>
                           </Col>
                       )
                     } else {
