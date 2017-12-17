@@ -1,7 +1,7 @@
 {
-  "name": "react-jsonschema-form-layout",
+  "name": "react-jsonschema-form-layout-grid",
   "version": "1.0.4",
-  "description": "react-jsonschema-form-layout React component",
+  "description": "react-jsonschema-form-layout-grid React component",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
@@ -45,10 +45,10 @@
     "react-dropzone": "^4.2.3",
     "react-test-renderer": "^16.2.0"
   },
-  "author": "Mario Scheliga <marsch.js@gmail.com>",
+  "author": "narazaka",
   "homepage": "",
   "license": "MIT",
-  "repository": "https://github.com/audibene-labs/react-jsonschema-form-layout",
+  "repository": "https://github.com/Narazaka/react-jsonschema-form-layout-grid",
   "keywords": [
     "react-component"
   ],
