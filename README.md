@@ -15,7 +15,6 @@ see [DEMO](https://narazaka.github.io/react-jsonschema-form-layout-grid/demo/dis
 
 * support bootstrap's grid
 * add non-form elements in between
-* ability to control display of elements based on form-state
 
 [build-badge]: https://img.shields.io/travis/Narazaka/react-jsonschema-form-layout-grid/master.png?style=flat-square
 [build]: https://travis-ci.org/Narazaka/react-jsonschema-form-layout-grid
