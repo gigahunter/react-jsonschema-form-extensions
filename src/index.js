@@ -33,7 +33,7 @@ export default class LayoutGridField extends ObjectField {
       const title = group && typeof group === 'string' ? group : null
 
       return (
-        <fieldset>
+        <fieldset className="rjsf-layout-grid-group">
           {title ? <TitleField
               title={title}
               required={required}
@@ -60,7 +60,7 @@ export default class LayoutGridField extends ObjectField {
 
       return (
         <Col {...colProps} key={key}>
-          <fieldset>
+          <fieldset className="rjsf-layout-grid-group">
             {title ? <TitleField
                 title={title}
                 required={required}
