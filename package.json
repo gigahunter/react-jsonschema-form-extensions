@@ -27,7 +27,7 @@
     "react-jsonschema-form": ">= 0.43.0"
   },
   "peerDependencies": {
-    "react": "15.x"
+    "react": "16.x"
   },
   "devDependencies": {
     "babel-eslint": "7.1.1",
@@ -40,10 +40,10 @@
     "jest": "19.0.2",
     "nwb": "0.15.x",
     "nwb-less": " 0.5.1",
-    "react": "15.4.2",
-    "react-dom": "15.4.2",
-    "react-dropzone": " 3.11.0",
-    "react-test-renderer": " 15.4.2"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-dropzone": "^4.2.3",
+    "react-test-renderer": "^16.2.0"
   },
   "author": "Mario Scheliga <marsch.js@gmail.com>",
   "homepage": "",
