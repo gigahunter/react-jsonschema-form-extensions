@@ -57,7 +57,7 @@ const schema = {
 }
 
 const fields = {
-  layout: LayoutField,
+  layout_grid: LayoutField,
   TitleField: TitleField
 }
 
@@ -69,38 +69,43 @@ const isFilled = (fieldName) => ({ formData }) => (formData[fieldName] && formDa
 const isTrue = (fieldName) => ({ formData }) => (formData[fieldName])
 
 const uiSchema = {
-  'ui:field': 'layout',
-  'ui:layout': [
-    {
-      firstName: { md: 6 },
-      lastName: { md: 6, doShow: isFilled('firstName') }
-    }, {
-      image: { md: 3, doShow: isFilled('lastName')  },
-      user: { md: 9 ,  doShow: isFilled('lastName') }
-    }, {
-      details: { md: 12 }
-    }, {
-      'description': {
-        md: 12,
-        doShow: isFilled('lastName'),
-        render: (props) => {
-          const { formData, errorSchema } = props
-          const { firstName, lastName } = formData
+  'ui:field': 'layout_grid',
+  'ui:layout_grid': { 'ui:row': [
+    { 'ui:col': { md: 12, children: [
+      { 'ui:group': 'ABC', 'ui:row': [
+        { 'ui:col': { md: 6, children: ['firstName'] } },
+        { 'ui:col': { md: 6, children: ['lastName'] } },
+      ] },
+      { 'ui:row': [
+        { 'ui:col': { md: 3, children: ['image'] } },
+        { 'ui:col': { md: 9, children: ['user'] } },
+      ] },
+      { 'ui:row': [
+        { 'ui:col': { md: 12, children: ['details'] } },
+      ] },
+      { 'ui:row': [
+        { 'ui:col': { md: 12, children: [
+          { name: 'description', render: (props) => {
+            const { formData, errorSchema } = props
+            const { firstName, lastName } = formData
 
-          return (
-            <div>
-              <h3>Hello, {firstName} {lastName}!</h3>
-              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sad</p>
-            </div>
-          )
-        }
-      }
-    }, {
-      age: { md: 12, doShow: isTrue('details') }
-    }, {
-      bio: { md: 12, doShow: isTrue('details')  }
-    }
-  ],
+            return (
+              <div>
+                <h3>Hello, {firstName} {lastName}!</h3>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sad</p>
+              </div>
+            )
+          } }
+        ] } },
+      ] },
+      { 'ui:row': [
+        { 'ui:col': { md: 12, children: ['age'] } },
+      ] },
+      { 'ui:row': [
+        { 'ui:col': { md: 12, children: ['bio'] } },
+      ] },
+    ] } },
+  ] },
   'bio': {
     'ui:widget': 'textarea'
   },
@@ -108,10 +113,11 @@ const uiSchema = {
     'ui:widget': 'ImageUpload'
   },
   'user': {
-    'ui:field': 'layout',
-    'ui:layout': [
-      { username: { md: 12 } }, { password: { md: 12 } },
-    ],
+    'ui:field': 'layout_grid',
+    'ui:layout_grid': { 'ui:row': [
+        { 'ui:col': { md: 6, children: ['username'] } },
+        { 'ui:col': { md: 6, children: ['password'] } },
+    ] },
 
   }
 }
