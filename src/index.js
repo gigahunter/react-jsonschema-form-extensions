@@ -1,148 +1,55 @@
-import React from 'react'
-import ObjectField from 'react-jsonschema-form/lib/components/fields/ObjectField'
-import { retrieveSchema } from 'react-jsonschema-form/lib/utils'
-import { Col } from 'react-bootstrap'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Form from 'react-jsonschema-form';
 
-export default class LayoutGridField extends ObjectField {
-  state = { firstName: 'hasldf' }
+import transformErrors from './transformErrors';
+import myWidgets from './widgets';
+import myFields from './fields';
+
+class JsonForm extends Component {
+  submit() {
+    this.form.submit();
+  }
 
   render() {
-    const { uiSchema } = this.props
-    let { layoutGridSchema } = this.props
-    if (!layoutGridSchema) layoutGridSchema = uiSchema['ui:layout_grid']
+    const props = this.props;
+    let widgets = myWidgets;
+    let fields = myFields;
 
-    if (layoutGridSchema['ui:row']) {
-      return this.renderRow(layoutGridSchema)
-    } else if (layoutGridSchema['ui:col']) {
-      return this.renderCol(layoutGridSchema)
-    } else {
-      return this.renderField(layoutGridSchema)
-    }
-  }
+    if (props.fields) fields = { ...fields, ...props.fields };
+    if (props.widgets) widgets = { ...widgets, ...props.widgets };
 
-  renderRow(layoutGridSchema) {
-    const { key } = this.props
-    const rows = layoutGridSchema['ui:row']
+    const formProps = { ...props, widgets, fields }; // to override
+    formProps.formContext = props.formData;
 
-    const group = layoutGridSchema['ui:group']
+    const myTransformErrors = errors => {
+      const err = transformErrors(errors);
+      if (props.transformErrors) return props.transformErrors(err);
+      return err;
+    };
+    formProps.transformErrors = myTransformErrors;
 
-    if (group) {
-      const { fields, formContext } = this.props.registry
-      const { TitleField } = fields
-      const { required } = this.props
-      const title = group && typeof group === 'string' ? group : null
-
-      return (
-        <fieldset className="rjsf-layout-grid-group">
-          {title ? <TitleField
-              title={title}
-              required={required}
-              formContext={formContext}/> : null}
-          {<div className="row" key={key}>{this.renderChildren(rows)}</div>}
-        </fieldset>
-      )
-    } else {
-      return <div className="row" key={key}>{this.renderChildren(rows)}</div>
-    }
-  }
-
-  renderCol(layoutGridSchema) {
-    const { key } = this.props
-    const { children, ...colProps } = layoutGridSchema['ui:col']
-
-    const group = layoutGridSchema['ui:group']
-
-    if (group) {
-      const { fields, formContext } = this.props.registry
-      const { TitleField } = fields
-      const { required } = this.props
-      const title = group && typeof group === 'string' ? group : null
-
-      return (
-        <Col {...colProps} key={key}>
-          <fieldset className="rjsf-layout-grid-group">
-            {title ? <TitleField
-                title={title}
-                required={required}
-                formContext={formContext}/> : null}
-            {this.renderChildren(children)}
-          </fieldset>
-        </Col>
-      )
-    } else {
-      return <Col {...colProps} key={key}>{this.renderChildren(children)}</Col>
-    }
-  }
-
-  renderChildren(childrenLayoutGridSchema) {
-    const { definitions } = this.props.registry
-    const schema = retrieveSchema(this.props.schema, definitions)
-
-    return childrenLayoutGridSchema.map((layoutGridSchema, index) => (
-      <LayoutGridField
-        {...this.props}
-        key={index}
-        schema={schema}
-        layoutGridSchema={layoutGridSchema}/>
-    ))
-  }
-
-  renderField(layoutGridSchema) {
-    const {
-      key,
-      uiSchema,
-      errorSchema,
-      idSchema,
-      disabled,
-      readonly,
-      onBlur,
-      onFocus,
-      formData
-    } = this.props
-    const { definitions, fields } = this.props.registry
-    const { SchemaField } = fields
-    const schema = retrieveSchema(this.props.schema, definitions)
-    let name
-    let render
-    if (typeof layoutGridSchema === 'string') {
-      name = layoutGridSchema
-    } else {
-      name = layoutGridSchema.name
-      render = layoutGridSchema.render
-    }
-
-    if (schema.properties[name]) {
-      return (
-        <SchemaField
-          key={key}
-          name={name}
-          required={this.isRequired(name)}
-          schema={schema.properties[name]}
-          uiSchema={uiSchema[name]}
-          errorSchema={errorSchema[name]}
-          idSchema={idSchema[name]}
-          formData={formData[name]}
-          onChange={this.onPropertyChange(name)}
-          onBlur={onBlur}
-          onFocus={onFocus}
-          registry={this.props.registry}
-          disabled={disabled}
-          readonly={readonly}/>
-      )
-    } else {
-      const UIComponent = render || (() => null)
-
-      return (
-        <UIComponent
-          key={key}
-          name={name}
-          formData={formData}
-          errorSchema={errorSchema}
-          uiSchema={uiSchema}
-          schema={schema}
-          registry={this.props.registry}
-        />
-      )
-    }
+    return (
+      <Form
+        noHtml5Validate
+        showErrorList={false}
+        liveValidate
+        {...formProps}
+        ref={ref => (this.form = ref)}
+        // noValidate
+      />
+    );
   }
 }
+
+JsonForm.propTypes = {
+  schema: PropTypes.object,
+  uiSchema: PropTypes.object,
+  formData: PropTypes.object,
+  onChange: PropTypes.func,
+  onSubmit: PropTypes.func,
+  onError: PropTypes.func,
+  validate: PropTypes.func,
+};
+
+export default JsonForm;

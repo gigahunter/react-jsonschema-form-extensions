@@ -1,4 +1,4 @@
-# react-jsonschema-form-layout-grid
+# react-jsonschema-form-extensions
 
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
@@ -32,7 +32,7 @@ see [DEMO](https://narazaka.github.io/react-jsonschema-form-layout-grid/demo/dis
 # Installation
 
 ```
-yarn add react-jsonschema-form-layout-grid
+npm install react-jsonschema-form-extensions
 ```
 
 # Usage:

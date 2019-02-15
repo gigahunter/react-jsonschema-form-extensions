@@ -5,7 +5,12 @@ module.exports = {
   },
   npm: {
     esModules: true,
-    umd: true
+    umd: {
+      global: 'ReactJsonForm',
+      externals: {
+        react: 'React'
+      }
+    }
   },
   webpack: {
     html: {
