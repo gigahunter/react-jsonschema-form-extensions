@@ -6,8 +6,8 @@ function DateWidget(props) {
     value,
     onChange,
     registry: {
-      widgets: { BaseInput },
-    },
+      widgets: { BaseInput }
+    }
   } = props;
 
   let nProps = props;
@@ -23,11 +23,11 @@ function DateWidget(props) {
       {...nProps}
       onChange={value => {
         if (!value) onChange(undefined);
-        else {
-          const ary = value.split('-').map(d => parseInt(d, 10));
-          const date = new Date(ary[0], ary[1] - 1, ary[2]);
-          onChange(date.toISOString());
-        }
+        if (parseInt(value.substr(0, 4)) < 1000) return;
+
+        const ary = value.split('-').map(d => parseInt(d, 10));
+        const date = new Date(ary[0], ary[1] - 1, ary[2]);
+        onChange(date.toISOString());
       }}
     />
   );
@@ -35,7 +35,7 @@ function DateWidget(props) {
 
 if (process.env.NODE_ENV !== 'production') {
   DateWidget.propTypes = {
-    value: PropTypes.string,
+    value: PropTypes.string
   };
 }
 

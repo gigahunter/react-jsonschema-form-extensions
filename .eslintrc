@@ -1,7 +1,5 @@
 {
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react"],
   "parser": "babel-eslint",
   "env": {
     "node": true,
@@ -14,14 +12,14 @@
     "decorators": true
   },
   "globals": {
-      "G": true,
-      "beforeEach": true,
-      "describe": true,
-      "it": true,
-      "afterEach": true,
-      "context": true,
-      "expect": true,
-      "sinon": true
+    "G": true,
+    "beforeEach": true,
+    "describe": true,
+    "it": true,
+    "afterEach": true,
+    "context": true,
+    "expect": true,
+    "sinon": true
   },
   "rules": {
     "strict": 1,
@@ -56,36 +54,33 @@
     "new-cap": 0,
     "no-spaced-func": 2,
     "semi-spacing": 2,
-    "quotes": [1, "single", {"allowTemplateLiterals": true}],
+    "quotes": [1, "single", { "allowTemplateLiterals": true }],
     "key-spacing": [2],
     "indent": ["error", 2],
 
     "object-curly-spacing": [2, "always"],
-    'space-before-function-paren': [
-      'error',
-      'never'
-    ],
-    'keyword-spacing': [
+    "space-before-function-paren": ["error", "never"],
+    "keyword-spacing": [
       2,
       {
-        'before': true,
-        'after': true
+        "before": true,
+        "after": true
       }
     ],
-    'semi': ['error', 'never'],
-    'prefer-const': ['error', {
-      'destructuring': 'any',
-      'ignoreReadBeforeAssign': false
-    }],
-    "space-infix-ops": ["error", {"int32Hint": false}],
+    "semi": ["error"],
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "any",
+        "ignoreReadBeforeAssign": false
+      }
+    ],
+    "space-infix-ops": ["error", { "int32Hint": false }],
     "react/jsx-no-undef": 2,
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1,
     "react/no-did-mount-set-state": 1,
     "react/no-did-update-set-state": 1,
-    "react/no-multi-comp": 1,
-    "react/prop-types": 1,
-    "react/react-in-jsx-scope": 1,
     "react/self-closing-comp": 1,
     "react/jsx-wrap-multilines": 2
   }

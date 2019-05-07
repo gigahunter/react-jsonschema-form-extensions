@@ -1,42 +1,42 @@
-import ArrayField from 'react-jsonschema-form/lib/components/fields/ArrayField'
-import { getWidget, getUiOptions } from 'react-jsonschema-form/lib/utils'
+import ArrayField from 'react-jsonschema-form/lib/components/fields/ArrayField';
+import { getWidget, getUiOptions } from 'react-jsonschema-form/lib/utils';
 
-import myWidgets from '../widgets'
+import myWidgets from '../widgets';
 
 function Label({ label, required }) {
   if (!label) {
     // See #312: Ensure compatibility with old versions of React.
-    return <div />
+    return <div />;
   }
   return (
     <label className="control-label">
       {label}
       {required && <span className="required">*</span>}
     </label>
-  )
+  );
 }
 
 function ArrayFieldDescription({ DescriptionField, idSchema, description }) {
   if (!description) {
     // See #312: Ensure compatibility with old versions of React.
-    return <div />
+    return <div />;
   }
-  const id = `${idSchema.$id}__description`
-  return <DescriptionField id={id} description={description} />
+  const id = `${idSchema.$id}__description`;
+  return <DescriptionField id={id} description={description} />;
 }
 
 function myArrayField(props) {
-  const { schema, uiSchema } = props
-  const { widget, ...options } = getUiOptions(uiSchema)
-  const { DescriptionField } = props.registry.fields
+  const { schema, uiSchema } = props;
+  const { widget, ...options } = getUiOptions(uiSchema);
+  const { DescriptionField } = props.registry.fields;
 
   if (widget) {
-    let Widget = null
+    let Widget = null;
 
     try {
-      Widget = getWidget(schema, widget, myWidgets)
+      Widget = getWidget(schema, widget, myWidgets);
     } catch (ex) {
-      Widget = null
+      Widget = null;
     }
 
     const {
@@ -50,11 +50,11 @@ function myArrayField(props) {
       onFocus,
       rawErrors,
       readonly
-    } = props
+    } = props;
 
     if (Widget) {
-      const title = props.uiSchema['ui:title'] || props.schema.title
-      const desc = props.uiSchema['ui:description'] || props.schema.description
+      const title = props.uiSchema['ui:title'] || props.schema.title;
+      const desc = props.uiSchema['ui:description'] || props.schema.description;
 
       return (
         <div className={props.className}>
@@ -81,11 +81,11 @@ function myArrayField(props) {
             readonly={readonly}
           />
         </div>
-      )
+      );
     }
   }
 
-  return <ArrayField {...props} />
+  return <ArrayField {...props} />;
 }
 
-export default myArrayField
+export default myArrayField;

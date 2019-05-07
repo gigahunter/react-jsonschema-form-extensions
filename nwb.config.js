@@ -8,7 +8,8 @@ module.exports = {
     umd: {
       global: 'ReactJsonForm',
       externals: {
-        react: 'React'
+        react: 'React',
+        'react-dom': 'ReactDOM'
       }
     }
   },
@@ -17,9 +18,8 @@ module.exports = {
       template: `demo/src/index.html`
     },
     extra: {
+      devtool: 'false',
       externals: [
-        'react-bootstrap',
-        'react-jsonschema-form',
         'react-addons-create-fragment',
         'react-addons-transition-group',
         {
@@ -27,18 +27,18 @@ module.exports = {
             root: 'React',
             commonjs2: './react',
             commonjs: ['./react'],
-            amd: 'react',
-          },
+            amd: 'react'
+          }
         },
         {
           'react-dom': {
             root: 'ReactDOM',
             commonjs2: './react-dom',
             commonjs: ['./react-dom'],
-            amd: 'react-dom',
-          },
+            amd: 'react-dom'
+          }
         }
       ]
     }
   }
-}
+};
