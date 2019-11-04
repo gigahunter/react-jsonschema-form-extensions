@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function PasswordWidget(props) {
   const { BaseInput } = props.registry.widgets;
-  return <BaseInput type="password" autocomplete="new-password" {...props} />;
+  return <BaseInput type="password" autoComplete="new-password" {...props} />;
 }
 
 if (process.env.NODE_ENV !== 'production') {

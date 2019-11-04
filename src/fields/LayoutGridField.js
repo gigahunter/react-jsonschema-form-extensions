@@ -3,6 +3,19 @@ import ObjectField from 'react-jsonschema-form/lib/components/fields/ObjectField
 import { retrieveSchema } from 'react-jsonschema-form/lib/utils';
 import { Col } from 'react-bootstrap';
 
+function checkUnValue(formData, objEnabled) {
+  if (!objEnabled) return false;
+
+  const v = formData[objEnabled.key];
+  const values = objEnabled.values;
+  if (values && values.indexOf && values.indexOf(v) < 0) {
+    return true;
+  }
+
+  if (objEnabled.value && v !== objEnabled.value) return true;
+  return false;
+}
+
 export default class LayoutGridField extends ObjectField {
   state = { firstName: 'hasldf' };
 
@@ -131,13 +144,30 @@ export default class LayoutGridField extends ObjectField {
     }
 
     if (schema.properties[name]) {
+      const uiSchemaS = uiSchema[name];
+      let uiDisabled = disabled;
+      if (uiSchemaS) {
+        const uiOptions = uiSchemaS['ui:options'];
+        if (uiOptions) {
+          const enabledIf = uiOptions.enabledIf;
+          if (enabledIf && checkUnValue(formData, enabledIf)) {
+            uiDisabled = true;
+          }
+
+          const showIf = uiOptions.showIf;
+          if (showIf && checkUnValue(formData, showIf)) {
+            return null;
+          }
+        }
+      }
+
       return (
         <SchemaField
           key={key}
           name={name}
           required={this.isRequired(name)}
           schema={schema.properties[name]}
-          uiSchema={uiSchema[name]}
+          uiSchema={uiSchemaS}
           errorSchema={errorSchema[name]}
           idSchema={idSchema[name]}
           formData={formData[name]}
@@ -145,7 +175,7 @@ export default class LayoutGridField extends ObjectField {
           onBlur={onBlur}
           onFocus={onFocus}
           registry={this.props.registry}
-          disabled={disabled}
+          disabled={uiDisabled}
           readonly={readonly}
         />
       );

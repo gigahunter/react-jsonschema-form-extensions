@@ -55,8 +55,9 @@ const AutoList = props => {
   }
 
   if (options.placeholder) tagProps.placeholder = options.placeholder;
+  else tagProps.placeholder = '';
 
-  return <ReactTags placeholder="" {...tagProps} />;
+  return <ReactTags {...tagProps} />;
 };
 
 export default AutoList;
