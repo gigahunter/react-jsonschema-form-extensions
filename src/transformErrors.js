@@ -40,7 +40,8 @@ export default function transformErrors(errors) {
       out = `應該要有屬性${e.params.property}的依賴屬性${e.params.deps}`;
       break;
     case 'enum':
-      out = '應該要在預設的值之中';
+      // out = '應該要在預設的值之中';
+      out = '請選擇';
       break;
     case 'exclusiveMaximum':
       cond = `${e.params.comparison} ${e.params.limit}`;

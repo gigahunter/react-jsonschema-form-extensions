@@ -18,7 +18,7 @@ module.exports = {
       template: `demo/src/index.html`
     },
     extra: {
-      devtool: 'false',
+      devtool: 'cheap-source-map',
       externals: [
         'react-addons-create-fragment',
         'react-addons-transition-group',
