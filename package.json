@@ -1,6 +1,6 @@
 {
     "name": "react-jsonschema-form-extensions",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "extensions for react-jsonschema-form, and forked from Narazaka/react-jsonschema-form-layout-grid",
     "main": "lib/index.js",
     "module": "es/index.js",
@@ -21,7 +21,7 @@
         "demo": "nwb build-demo"
     },
     "dependencies": {
-        "antd": "^3.26.14",
+        "antd": "^3.26.15",
         "react-bootstrap": "^0.33.1",
         "react-jsonschema-form": "^1.8.1",
         "react-rte": "^0.16.1",
